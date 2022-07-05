@@ -1,5 +1,6 @@
 package com.zipcodewilmington;
-
+import java.util.Arrays;
+import java.util.*;
 /**
  * Created by leon on 1/29/18.
  */
@@ -42,7 +43,16 @@ public class StringArrayUtils {
      * @return true if the array contains the specified `value`
      */ // TODO
     public static boolean contains(String[] array, String value) {
-        return false;
+
+        //enhanced for loop
+        for (String s : array) { // "For each element s in array"
+
+            if (s.equalsIgnoreCase(value)) { //this line compares String s to value while ignoring case
+                return true; //if strings are the same, returns true
+            }
+
+        }
+        return false; //otherwise returns false
     }
 
     /**
@@ -50,7 +60,13 @@ public class StringArrayUtils {
      * @return an array with identical contents in reverse order
      */ // TODO
     public static String[] reverse(String[] array) {
-        return null;
+        String[] reversedArray = new String[array.length];
+
+        for (int i = 0; i < array.length; i++) {
+            reversedArray[array.length - 1 - i] = array[i];
+        }
+
+        return reversedArray;
     }
 
     /**
@@ -58,7 +74,13 @@ public class StringArrayUtils {
      * @return true if the order of the array is the same backwards and forwards
      */ // TODO
     public static boolean isPalindromic(String[] array) {
-        return false;
+
+        for (int i = 0; i < array.length; i++) {
+            if (!array[i].equalsIgnoreCase(array[array.length - i - 1]))
+                return false;
+        }
+
+        return true;
     }
 
     /**
@@ -66,7 +88,19 @@ public class StringArrayUtils {
      * @return true if each letter in the alphabet has been used in the array
      */ // TODO
     public static boolean isPangramic(String[] array) {
-        return false;
+
+        String s = Arrays.toString(array).toLowerCase();
+        char l = 'a';
+
+        for (int i = 1; i <= 26; i++) {
+            if (!s.contains((String.valueOf(l)))) {
+                return false;
+            } else {
+                l++;
+            }
+
+        }
+        return true;
     }
 
     /**
@@ -75,7 +109,13 @@ public class StringArrayUtils {
      * @return number of occurrences the specified `value` has occurred
      */ // TODO
     public static int getNumberOfOccurrences(String[] array, String value) {
-        return 0;
+        int c = 0;
+        for (int i = 0; i <= array.length - 1; i++) {
+            if (array[i].equals(value)) {
+                c++;
+            }
+         }
+        return c;
     }
 
     /**
@@ -84,7 +124,26 @@ public class StringArrayUtils {
      * @return array with identical contents excluding values of `value`
      */ // TODO
     public static String[] removeValue(String[] array, String valueToRemove) {
-        return null;
+
+        int c = 0;
+
+        for (int i = 0; i <=array.length - 1; i++) {
+            if (array[i].equals(valueToRemove)) {
+                c++;
+            }
+        }
+
+        String[] newArray = new String[array.length - c];
+
+        for (int i1 = 0, i2 = 0; i1 < array.length; i1++) {
+            if (Objects.equals(array[i1], valueToRemove)) {
+
+            } else {
+                newArray[i2] = array[i1];
+                i2++;
+            }
+        }
+        return newArray;
     }
 
     /**
@@ -92,7 +151,30 @@ public class StringArrayUtils {
      * @return array of Strings with consecutive duplicates removes
      */ // TODO
     public static String[] removeConsecutiveDuplicates(String[] array) {
-        return null;
+
+        String[] s;
+        int c = 0;
+        int b = 0;
+        String duplicate = "";
+
+        for (int i = 0; i < array.length; i++) {
+            if (!array[i].equals(duplicate)) {
+                duplicate = array[i];
+            } else {
+                c++;
+            }
+        }
+
+        s = new String[array.length - c];
+
+        for (int i = 0; i < array.length; i++) {
+            if (!array[i].equals(duplicate)) {
+                s[b] = array[i];
+                duplicate = array[i];
+                b++;
+            }
+        }
+        return s;
     }
 
     /**
